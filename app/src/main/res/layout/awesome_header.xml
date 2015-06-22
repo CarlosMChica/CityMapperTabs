@@ -19,17 +19,17 @@
 			android:src="@drawable/header_image"
 			/>
 
-		<android.support.design.widget.TabLayout
-			android:id="@+id/tabs"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/tab_bar_height"
-			android:layout_gravity="bottom"
-			android:background="@android:color/transparent"
-			app:tabIndicatorHeight="3dp"
-			app:tabSelectedTextColor="@android:color/white"
-			app:tabTextColor="@color/white60"
-			/>
-
 	</FrameLayout>
+
+	<android.support.design.widget.TabLayout
+		android:id="@+id/tabs"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/tab_bar_height"
+		android:layout_gravity="bottom"
+		app:tabIndicatorColor="@android:color/white"
+		app:tabIndicatorHeight="3dp"
+		app:tabSelectedTextColor="@android:color/white"
+		app:tabTextColor="@color/white60"
+		/>
 
 </merge>

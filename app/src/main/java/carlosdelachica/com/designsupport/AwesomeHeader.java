@@ -5,18 +5,16 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
-import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class AwesomeToolbar extends LinearLayout {
+public class AwesomeHeader extends FrameLayout {
 
     @InjectView(R.id.tabs)
     TabLayout tabs;
@@ -29,33 +27,26 @@ public class AwesomeToolbar extends LinearLayout {
     private float maxOffset;
     private int currentOffset;
 
-    public AwesomeToolbar(Context context) {
+    public AwesomeHeader(Context context) {
         super(context);
         init();
     }
 
-    public AwesomeToolbar(Context context, AttributeSet attrs) {
+    public AwesomeHeader(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public AwesomeToolbar(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AwesomeHeader(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public AwesomeToolbar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init();
-    }
-
     private void init() {
-        LayoutInflater.from(getContext()).inflate(R.layout.awesome_toolbar, this, true);
+        LayoutInflater.from(getContext()).inflate(R.layout.awesome_header, this, true);
         ButterKnife.inject(this);
         initColors();
-        setOrientation(VERTICAL);
         image.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {

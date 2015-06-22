@@ -1,8 +1,11 @@
 package carlosdelachica.com.designsupport;
 
+import android.animation.ArgbEvaluator;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -20,18 +23,22 @@ import butterknife.InjectView;
 public class MainActivity extends AppCompatActivity
         implements AppBarLayout.OnOffsetChangedListener {
 
-    @InjectView(R.id.toolbar)
-    Toolbar toolbar;
     @InjectView(R.id.appbar)
     AppBarLayout appbar;
     @InjectView(R.id.viewpager)
     ViewPager viewpager;
-    @InjectView(R.id.collapsingToolbarLayout)
-    CollapsingToolbarLayout collapsingToolbarLayout;
-//    @InjectView(R.id.tabs)
-//    TabLayout tabs;
-//    @InjectView(R.id.awesomeToolbar)
-//    AwesomeToolbar awesomeToolbar;
+    @InjectView(R.id.tabs)
+    TabLayout tabs;
+    @InjectView(R.id.awesomeToolbar)
+    AwesomeHeader awesomeHeader;
+    @InjectView(R.id.toolbar)
+    Toolbar toolbar;
+    @InjectView(R.id.fab)
+    FloatingActionButton fab;
+
+    private ArgbEvaluator argbEvaluator = new ArgbEvaluator();
+    private int[] colors = new int[]{R.color.tinting1, R.color.tinting2, R.color.tinting3};
+    private int[] darkColors = new int[]{R.color.tinting1dark, R.color.tinting2dark, R.color.tinting3dark};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +49,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initUi() {
-        setSupportActionBar(toolbar);
+        initToolbar();
         initViewPager();
         appbar.addOnOffsetChangedListener(this);
-        collapsingToolbarLayout.setTitle(getTitle());
+    }
+
+    private void initToolbar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     private void initViewPager() {
@@ -55,28 +66,35 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                int color;
-                switch (position) {
-                    default:
-                    case 0:
-                        color = android.R.color.holo_red_dark;
-                        break;
-                    case 1:
-                        color = android.R.color.holo_green_dark;
-                        break;
-                    case 2:
-                        color = android.R.color.holo_blue_dark;
-                        break;
+                if (position != colors.length - 1) {
+                    setColor(position, positionOffset);
+                    setStatusBarColor(position, positionOffset);
                 }
-//                awesomeToolbar.setColor(getResources().getColor(color));
+            }
+
+            private void setColor(int position, float positionOffset) {
+                int color = (int) argbEvaluator.evaluate(
+                        positionOffset,
+                        getResources().getColor(colors[position]),
+                        getResources().getColor(colors[position + 1]));
+                awesomeHeader.setColor(color);
+                fab.setBackgroundTintList(ColorStateList.valueOf(color));
+            }
+
+            private void setStatusBarColor(int position, float positionOffset) {
+                int darkColor = (int) argbEvaluator.evaluate(
+                        positionOffset,
+                        getResources().getColor(darkColors[position]),
+                        getResources().getColor(darkColors[position + 1]));
+                getWindow().setStatusBarColor(darkColor);
             }
         });
-//        tabs.setupWithViewPager(viewpager);
+        tabs.setupWithViewPager(viewpager);
     }
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
-//        awesomeToolbar.onOffsetChanged(offset);
+        awesomeHeader.onOffsetChanged(offset);
     }
 
     class ViewPagerAdapter extends PagerAdapter {
