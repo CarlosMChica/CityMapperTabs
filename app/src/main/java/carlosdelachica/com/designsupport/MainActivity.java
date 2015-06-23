@@ -1,8 +1,7 @@
 package carlosdelachica.com.designsupport;
 
-import android.animation.ArgbEvaluator;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -36,9 +35,7 @@ public class MainActivity extends AppCompatActivity
     @InjectView(R.id.fab)
     FloatingActionButton fab;
 
-    private ArgbEvaluator argbEvaluator = new ArgbEvaluator();
-    private int[] colors = new int[]{R.color.tinting1, R.color.tinting2, R.color.tinting3};
-    private int[] darkColors = new int[]{R.color.tinting1dark, R.color.tinting2dark, R.color.tinting3dark};
+    private ColorCalculator colorCalculator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +46,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initUi() {
+        colorCalculator = new ColorCalculator(this);
         initToolbar();
         initViewPager();
         appbar.addOnOffsetChangedListener(this);
@@ -60,33 +58,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initViewPager() {
-        viewpager.setOffscreenPageLimit(4);
         viewpager.setAdapter(new ViewPagerAdapter());
         viewpager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (position != colors.length - 1) {
-                    setColor(position, positionOffset);
-                    setStatusBarColor(position, positionOffset);
-                }
-            }
-
-            private void setColor(int position, float positionOffset) {
-                int color = (int) argbEvaluator.evaluate(
-                        positionOffset,
-                        getResources().getColor(colors[position]),
-                        getResources().getColor(colors[position + 1]));
-                awesomeHeader.setColor(color);
-                fab.setBackgroundTintList(ColorStateList.valueOf(color));
-            }
-
-            private void setStatusBarColor(int position, float positionOffset) {
-                int darkColor = (int) argbEvaluator.evaluate(
-                        positionOffset,
-                        getResources().getColor(darkColors[position]),
-                        getResources().getColor(darkColors[position + 1]));
-                getWindow().setStatusBarColor(darkColor);
+                setHeaderColor(colorCalculator.calculateBrightColor(positionOffset, position));
+                setFabColor(colorCalculator.calculateAccentColor(positionOffset, position));
+                setStatusBarColor(colorCalculator.calculateDarkColor(positionOffset, position));
             }
         });
         tabs.setupWithViewPager(viewpager);
@@ -95,6 +73,20 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
         awesomeHeader.onOffsetChanged(offset);
+    }
+
+    private void setHeaderColor(int brightColor) {
+        awesomeHeader.setColor(brightColor);
+    }
+
+    private void setFabColor(int brightColor) {
+        fab.setBackgroundTintList(ColorStateList.valueOf(brightColor));
+    }
+
+    private void setStatusBarColor(int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(color);
+        }
     }
 
     class ViewPagerAdapter extends PagerAdapter {

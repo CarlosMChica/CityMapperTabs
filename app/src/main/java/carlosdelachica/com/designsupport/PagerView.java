@@ -14,9 +14,6 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-/**
- * Created by carlos.morera on 19/06/2015.
- */
 public class PagerView extends FrameLayout {
 
     @InjectView(R.id.list)

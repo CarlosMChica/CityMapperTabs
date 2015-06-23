@@ -16,8 +16,6 @@ import butterknife.InjectView;
 
 public class AwesomeHeader extends FrameLayout {
 
-    @InjectView(R.id.tabs)
-    TabLayout tabs;
     @InjectView(R.id.image)
     ImageView image;
     @InjectView(R.id.imageContainer)

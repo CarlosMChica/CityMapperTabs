@@ -9,9 +9,6 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-/**
- * Created by carlos.morera on 19/06/2015.
- */
 public class ItemViewHolder extends RecyclerView.ViewHolder {
     @InjectView(R.id.text)
     TextView text;
@@ -20,6 +17,5 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
         super(LayoutInflater.from(context).inflate(R.layout.item_view, viewGroup, false));
         ButterKnife.inject(this, itemView);
     }
-
 
 }

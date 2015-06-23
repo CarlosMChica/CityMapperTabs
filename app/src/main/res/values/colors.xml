@@ -12,12 +12,13 @@
 	<color name="white60">#99FFFFFF</color>
 	<color name="black30">#4D000000</color>
 
-	<color name="tinting1">#73AD26</color>
-	<color name="tinting2">#E6B300</color>
-	<color name="tinting3">#DB3A74</color>
+	<color name="tinting1">#009688</color>
+	<color name="tinting1dark">#00796B</color>
+	<color name="tinting1accent">#FF5722</color>
 
-	<color name="tinting1dark">#375412</color>
-	<color name="tinting2dark">#665000</color>
-	<color name="tinting3dark">#56102A</color>
+	<color name="tinting2">#E91E63</color>
+	<color name="tinting2dark">#C2185B</color>
+	<color name="tinting2accent">#448aFF</color>
+
 
 </resources>
