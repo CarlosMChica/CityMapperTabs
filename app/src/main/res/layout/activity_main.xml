@@ -1,65 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	>
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/content"
+    >
 
-	<android.support.design.widget.CoordinatorLayout
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:app="http://schemas.android.com/apk/res-auto"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		>
+  <android.support.design.widget.CoordinatorLayout
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
 
-		<android.support.design.widget.AppBarLayout
-			android:id="@+id/appbar"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			>
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
 
-			<carlosdelachica.com.designsupport.AwesomeHeader
-				android:id="@+id/awesomeToolbar"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:minHeight="104dp"
-				app:layout_scrollFlags="scroll|exitUntilCollapsed"
-				/>
+      <carlosdelachica.com.designsupport.AwesomeHeader
+          android:id="@+id/awesomeToolbar"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:minHeight="104dp"
+          app:layout_scrollFlags="scroll|exitUntilCollapsed"
+          />
 
-		</android.support.design.widget.AppBarLayout>
+    </android.support.design.widget.AppBarLayout>
 
-		<android.support.v4.view.ViewPager
-			android:id="@+id/viewpager"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:background="@android:color/white"
-			app:layout_behavior="@string/appbar_scrolling_view_behavior"
-			/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
 
-	</android.support.design.widget.CoordinatorLayout>
+  </android.support.design.widget.CoordinatorLayout>
 
-	<android.support.v7.widget.Toolbar
-		android:id="@+id/toolbar"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="@android:color/transparent"
-		android:minHeight="?attr/actionBarSize"
-		app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-		app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-		/>
+  <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@android:color/transparent"
+      android:minHeight="?attr/actionBarSize"
+      app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+      app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+      />
 
 
-	<android.support.design.widget.FloatingActionButton
-		android:id="@+id/fab"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="right|bottom"
-		android:layout_margin="@dimen/fab_margin_compat"
-		android:src="@drawable/abc_btn_rating_star_on_mtrl_alpha"
-		app:borderWidth="0dp"
-		app:rippleColor="@color/black30"
-		/>
+  <android.support.design.widget.FloatingActionButton
+      android:id="@+id/fab"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="right|bottom"
+      android:layout_margin="@dimen/fab_margin_compat"
+      android:src="@drawable/abc_btn_rating_star_on_mtrl_alpha"
+      app:borderWidth="0dp"
+      app:rippleColor="@color/black30"
+      />
 
 </FrameLayout>
 
